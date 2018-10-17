@@ -16,8 +16,8 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
             <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="attendanceDate"><span>Attendance Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="rfbEventId"><span>Rfb Event</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="rfbUserId"><span>Rfb User</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="rfbEventId"><span>Event</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="rfbUserId"><span>Runner</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -26,13 +26,14 @@
                 <td><a [routerLink]="['/rfb-event-attendance', rfbEventAttendance.id, 'view' ]">{{rfbEventAttendance.id}}</a></td>
                 <td>{{rfbEventAttendance.attendanceDate | date:'mediumDate'}}</td>
                 <td>
-                    <div *ngIf="rfbEventAttendance.rfbEventId">
-                        <a [routerLink]="['../rfb-event', rfbEventAttendance.rfbEventId , 'view' ]" >{{rfbEventAttendance.rfbEventId}}</a>
+                    <div *ngIf="rfbEventAttendance.rfbEventDTO">
+                        <a [routerLink]="['../rfb-event', rfbEventAttendance.rfbEventDTO.id  ]" >{{rfbEventAttendance.rfbEventDTO.rfbLocationDTO.locationName}} : {{ rfbEventAttendance.attendanceDate | date }} </a>
+
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="rfbEventAttendance.rfbUserId">
-                        <a [routerLink]="['../rfb-user', rfbEventAttendance.rfbUserId , 'view' ]" >{{rfbEventAttendance.rfbUserId}}</a>
+                    <div *ngIf="rfbEventAttendance">
+                        <a [routerLink]="['../rfb-user', rfbEventAttendance.rfbUserDTO.id  ]" >{{rfbEventAttendance.rfbUserDTO.username}}</a>
                     </div>
                 </td>
                 <td class="text-right">
